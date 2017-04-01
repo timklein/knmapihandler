@@ -1,0 +1,18 @@
+{
+  "name": "knmapihandler",
+  "version": "1.0.0",
+  "description": "Klein New Media API Routing Tool",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "nodemon --ignore data/ app.js",
+    "prod": "forever start app.js"
+  },
+  "author": "Tim Klein",
+  "license": "ISC",
+  "dependencies": {
+    "body-parser": "^1.17.1",
+    "express": "^4.15.2",
+    "request": "^2.81.0"
+  }
+}

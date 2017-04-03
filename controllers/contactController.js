@@ -6,11 +6,10 @@ const configVars = require('../config/configVars.json');
 const accounts = require('../data/accounts.json');
 
 let apiURL = ""
-const blank = ""
 
 const contactController = {
 
-	createContact	: function (req, res) {
+	createContact	: function (req, res, next) {
 
 		// Build API URL path for the record query
 		apiURL = "https://" + req.body.toAccount + ".infusionsoft.com/api/xmlrpc/";
@@ -48,11 +47,14 @@ const contactController = {
 			}
 
 			else {
-				console.log(body);
+
+				let newId = body.split('<value><i4>')[1].split('</i4></value>')[0];
+
+				req.body.newContactId = newId;
+
+				next();
 			}
 		});
-
-		res.sendStatus(200);
 	}
 };
 

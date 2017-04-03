@@ -24,7 +24,7 @@ const contactController = {
 		let State 			= req.body.State || ""; 
 		let PostalCode 		= req.body.PostalCode || ""; 
 		let Country			= req.body.Country || "";
-		let customField1	= configVars.customField1;
+		let customField1	= accounts[req.body.toAccount].customField1;
 		let customValue1	= req.body.contactId; 
 
 		// Get the Infusionsoft API access key associated with the account this request is coming from

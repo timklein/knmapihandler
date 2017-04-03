@@ -1,10 +1,12 @@
 {
 	"ACCOUNT_IDENTIFIER" : {
-		"name"	: "ACCOUNT_NAME_STRING",
-		"key"	: "INFUSIONSOFT_APP_KEY"
+		"name"			: "ACCOUNT_NAME_STRING",
+		"key"			: "INFUSIONSOFT_APP_KEY",
+		"customField1"	: "FROM_ACCT_CUSTOM_FIELD_ID"
 	},
 	"ACCOUNT_IDENTIFIER" : {
-		"name"	: "ACCOUNT_NAME_STRING",
-		"key"	: "INFUSIONSOFT_APP_KEY"
+		"name"			: "ACCOUNT_NAME_STRING",
+		"key"			: "INFUSIONSOFT_APP_KEY",
+		"customField1"	: "FROM_ACCT_CUSTOM_FIELD_ID"
 	}
 }

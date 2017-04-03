@@ -5,7 +5,7 @@ const request = require('request');
 const configVars = require('../config/configVars.json');
 const accounts = require('../data/accounts.json');
 
-let apiURL = ""
+let apiURL = "";
 
 const contactController = {
 
@@ -31,7 +31,7 @@ const contactController = {
 		let keyBuild = accounts[req.body.toAccount].key;
 
 		// Populate the variables into the API submission string
-		let submissionBody = '<?xml version="1.0" encoding="UTF-8"?><methodCall><methodName>ContactService.addWithDupCheck</methodName><params><param><value><string>' + keyBuild + '</string></value></param><param><value><struct><member><name>FirstName</name><value><string>' + FirstName + '</string></value></member><member><name>LastName</name><value><string>' + LastName + '</string></value></member><member><name>Email</name><value><string>' + Email + '</string></value></member><member><name>Phone1</name><value><string>' + Phone1 + '</string></value></member><member><name>Phone2</name><value><string>' + Phone2 + '</string></value></member><member><name>StreetAddress1</name><value><string>' + StreetAddress1 + '</string></value></member><member><name>City</name><value><string>' + City + '</string></value></member><member><name>State</name><value><string>' + State + '</string></value></member><member><name>PostalCode</name><value><string>' + PostalCode + '</string></value></member><member><name>Country</name><value><string>' + Country + '</string></value></member><member><name>' + customField1 + '</name><value><string>' + customValue1 + '</string></value></member></struct></value></param><param><value><string>Email</string></value></param></params></methodCall>'
+		let submissionBody = '<?xml version="1.0" encoding="UTF-8"?><methodCall><methodName>ContactService.addWithDupCheck</methodName><params><param><value><string>' + keyBuild + '</string></value></param><param><value><struct><member><name>FirstName</name><value><string>' + FirstName + '</string></value></member><member><name>LastName</name><value><string>' + LastName + '</string></value></member><member><name>Email</name><value><string>' + Email + '</string></value></member><member><name>Phone1</name><value><string>' + Phone1 + '</string></value></member><member><name>Phone2</name><value><string>' + Phone2 + '</string></value></member><member><name>StreetAddress1</name><value><string>' + StreetAddress1 + '</string></value></member><member><name>City</name><value><string>' + City + '</string></value></member><member><name>State</name><value><string>' + State + '</string></value></member><member><name>PostalCode</name><value><string>' + PostalCode + '</string></value></member><member><name>Country</name><value><string>' + Country + '</string></value></member><member><name>' + customField1 + '</name><value><string>' + customValue1 + '</string></value></member></struct></value></param><param><value><string>Email</string></value></param></params></methodCall>';
 
 		// Send the request to the Infussionsoft API
 		request ({
@@ -42,8 +42,8 @@ const contactController = {
 		}, function (err, resp, body) {
 
 			if (err) {
-				return console.log('Request to API not sent: ', err);
 				res.sendStatus(200);
+				return console.log('Request to API not sent: ', err);
 			}
 
 			else {

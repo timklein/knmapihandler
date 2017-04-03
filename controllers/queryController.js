@@ -5,7 +5,7 @@ const request = require('request');
 const configVars = require('../config/configVars.json');
 const accounts = require('../data/accounts.json');
 
-let apiURL = ""
+let apiURL = "";
 
 const apiController = {
 
@@ -13,7 +13,7 @@ const apiController = {
 	retrieveForReferral	: function (req,res, next) {
 
 		// Build API URL path for the record query
-		apiURL = "https://" + configVars.sourceAcct + ".infusionsoft.com/api/xmlrpc/"
+		apiURL = "https://" + configVars.sourceAcct + ".infusionsoft.com/api/xmlrpc/";
 
 		// Confirm the incoming request has the assigned access key
 		if (req.body.accessKey == configVars.accessKey) {
@@ -22,7 +22,7 @@ const apiController = {
 			let keyBuild = accounts[configVars.sourceAcct].key;
 
 			// Populate the variables into the API submission string
-			let searchBody = '<?xml version="1.0" encoding="UTF-8"?><methodCall><methodName>ContactService.load</methodName><params><param><value><string>' + keyBuild + '</string></value></param><param><value><int>' + req.body.contactId + '</int></value></param><param><value><array><data><value><string>FirstName</string></value><value><string>LastName</string></value><value><string>Email</string></value><value><string>Phone1</string></value><value><string>Phone2</string></value><value><string>StreetAddress1</string></value><value><string>City</string></value><value><string>State</string></value><value><string>PostalCode</string></value><value><string>Country</string></value></data></array></value></param></params></methodCall>'
+			let searchBody = '<?xml version="1.0" encoding="UTF-8"?><methodCall><methodName>ContactService.load</methodName><params><param><value><string>' + keyBuild + '</string></value></param><param><value><int>' + req.body.contactId + '</int></value></param><param><value><array><data><value><string>FirstName</string></value><value><string>LastName</string></value><value><string>Email</string></value><value><string>Phone1</string></value><value><string>Phone2</string></value><value><string>StreetAddress1</string></value><value><string>City</string></value><value><string>State</string></value><value><string>PostalCode</string></value><value><string>Country</string></value></data></array></value></param></params></methodCall>';
 
 			// Send the request to the Infussionsoft API
 			request ({
@@ -33,8 +33,8 @@ const apiController = {
 			}, function (err, resp, body) {
 				
 				if (err) {
-					return console.log('Request to API not sent: ', err);
 					res.sendStatus(200);
+					return console.log('Request to API not sent: ', err);
 				}
 
 				else {
@@ -97,7 +97,7 @@ const apiController = {
 		// Get the Infusionsoft API access key associated with the account this request is coming from
 		let keyBuild = accounts[req.body.toAccount].key;
 
-		let findTag = '<?xml version="1.0" encoding="UTF-8"?><methodCall><methodName>DataService.query</methodName><params><param><value><string>' + keyBuild + '</string></value></param><param><value><string>ContactGroup</string></value></param><param><value><int>5</int></value></param><param><value><int>0</int></value></param><param><value><struct><member><name>GroupName</name><value><string>' + configVars.referTagName + '</string></value></member></struct></value></param><param><value><array><data><value><string>GroupName</string></value><value><string>Id</string></value></data></array></value></param><param><value><string>GroupName</string></value></param><param><value><boolean>1</boolean></value></param></params></methodCall>'
+		let findTag = '<?xml version="1.0" encoding="UTF-8"?><methodCall><methodName>DataService.query</methodName><params><param><value><string>' + keyBuild + '</string></value></param><param><value><string>ContactGroup</string></value></param><param><value><int>5</int></value></param><param><value><int>0</int></value></param><param><value><struct><member><name>GroupName</name><value><string>' + configVars.referTagName + '</string></value></member></struct></value></param><param><value><array><data><value><string>GroupName</string></value><value><string>Id</string></value></data></array></value></param><param><value><string>GroupName</string></value></param><param><value><boolean>1</boolean></value></param></params></methodCall>';
 
 		request ({
 			method	: 'POST',
@@ -107,8 +107,8 @@ const apiController = {
 		}, function (err, resp, body) {
 
 			if (err) {
-				return console.log('Request to API not sent: ', err);
 				res.sendStatus(200);
+				return console.log('Request to API not sent: ', err);
 			}
 			else {
 				

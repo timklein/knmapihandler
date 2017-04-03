@@ -5,7 +5,7 @@ const request = require('request');
 const configVars = require('../config/configVars.json');
 const accounts = require('../data/accounts.json');
 
-let apiURL = ""
+let apiURL = "";
 
 const tagController = {
 
@@ -18,7 +18,7 @@ const tagController = {
 		let keyBuild = accounts[req.body.toAccount].key;
 
 		// Populate the variables into the API submission string
-		let updateBody = '<?xml version="1.0" encoding="UTF-8"?><methodCall><methodName>ContactService.addToGroup</methodName><params><param><value><string>' + keyBuild + '</string></value></param><param><value><int>' + req.body.newContactId + '</int></value></param><param><value><int>' + req.body.tagId + '</int></value></param></params></methodCall>'
+		let updateBody = '<?xml version="1.0" encoding="UTF-8"?><methodCall><methodName>ContactService.addToGroup</methodName><params><param><value><string>' + keyBuild + '</string></value></param><param><value><int>' + req.body.newContactId + '</int></value></param><param><value><int>' + req.body.tagId + '</int></value></param></params></methodCall>';
 		
 		// Send the request to the Infussionsoft API
 		request ({
@@ -29,8 +29,8 @@ const tagController = {
 		}, function (err, resp, body) {
 
 			if (err) {
-				return console.log('Request to API not sent: ', err);
 				res.sendStatus(200);
+				return console.log('Request to API not sent: ', err);
 			}
 			else {
 

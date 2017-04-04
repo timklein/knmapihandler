@@ -15,7 +15,7 @@ app.use(bodyParser.urlencoded({ extended:false }));
 app.post('/incoming/cc', contactController.retrieveForReferral, contactController.createContact, tagController.referralTagId, tagController.applyReferralTag);
 
 // Stage Move Route -
-app.post('/incoming/sm', stageController.opportunityId);
+app.post('/incoming/sm', stageController.opportunityId, stageController.updateStage);
 
 const port = 3000;
 const server = app.listen(port, function() {

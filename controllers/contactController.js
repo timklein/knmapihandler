@@ -2,6 +2,8 @@
 
 const request = require('request');
 
+const logger = require('../utils/logger.js');
+
 const configVars = require('../config/configVars.json');
 const accounts = require('../data/accounts.json');
 
@@ -13,7 +15,7 @@ const contactController = {
 	retrieveForReferral	: function (req,res, next) {
 
 		// Build API URL path for the record query
-		apiURL = "https://" + configVars.sourceAcct + ".infusionsoft.com/api/xmlrpc/";
+		apiURL = "https://" + configVars.sourceAcct + ".infusionsoft.com/api/xmlrpc";
 
 		// Confirm the incoming request has the assigned access key
 		if (req.body.accessKey == configVars.accessKey) {
@@ -31,12 +33,17 @@ const contactController = {
 				headers	: {'Content-Type' : 'application/xml'},
 				body	: searchBody
 			}, function (err, resp, body) {
-				
+
+				logger.verbose('API Load Contact Response Body: ' + body);
+
 				if (err) {
 					res.sendStatus(200);
-					return console.log('Request to API not sent: ', err);
+					return logger.error('Request to API not sent: ', err);
 				}
-
+				else if (body.includes('faultCode')) {
+					logger.error('Contact Info Not Retrieved');
+					res.sendStatus(200);
+				}
 				else {
 
 					let parsedBody = body.split('<name>');
@@ -79,13 +86,13 @@ const contactController = {
 								break;
 						}
 					}
-				}
-
+				logger.info('Contact Info Retrieved and Request Body Built');
 				next();
+				}
 			});
 		}
 		else {
-			console.log('POST Request Declined from IP: ' + req.ip);
+			logger.warn('POST Request Declined from IP: ' + req.ip);
 			res.sendStatus(401);
 		}
 	},
@@ -121,17 +128,21 @@ const contactController = {
 			body	: submissionBody
 		}, function (err, resp, body) {
 
+			logger.verbose('API Add Contact with Dup Check Response Body: ' + body);
+
 			if (err) {
 				res.sendStatus(200);
-				return console.log('Request to API not sent: ', err);
+				return logger.error('Request to API not sent: ', err);
 			}
-
+			else if (body.includes('faultCode')) {
+				logger.error('Database Error - Contact Record Not Loaded');
+				res.sendStatus(200);
+			}
 			else {
 
 				let newId = body.split('<value><i4>')[1].split('</i4></value>')[0];
-
 				req.body.newContactId = newId;
-
+				logger.info('Contact Record ' + newId + ' Created/Updated');
 				next();
 			}
 		});

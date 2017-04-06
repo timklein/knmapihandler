@@ -5,15 +5,19 @@
   "main": "app.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "nodemon --ignore data/ app.js",
-    "prod": "forever start app.js"
+    "start": "nodemon --ignore log/ app.js",
+    "prod": "NODE_ENV=production forever start app.js"
   },
   "author": "Tim Klein",
   "license": "ISC",
   "dependencies": {
     "body-parser": "^1.17.1",
     "express": "^4.15.2",
-    "request": "^2.81.0"
+    "morgan": "^1.8.1",
+    "request": "^2.81.0",
+    "split": "^1.0.0",
+    "winston": "^2.3.1",
+    "winston-daily-rotate-file": "^1.4.6"
   },
   "jshintConfig": {
     "esversion": 6,

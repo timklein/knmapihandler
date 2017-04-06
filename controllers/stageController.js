@@ -2,6 +2,8 @@
 
 const request = require('request');
 
+const logger = require('../utils/logger.js');
+
 const configVars = require('../config/configVars.json');
 const accounts = require('../data/accounts.json');
 
@@ -28,23 +30,28 @@ const stageController = {
 				body	: opportunityBody
 			}, function (err, resp, body) {
 
+				logger.verbose('API Retrieve Opportunity Record Response Body: ' + body);
+
 				if (err) {
 					res.sendStatus(200);
-					return console.log('Request to API not sent: ', err);
+					return logger.error('Request to API not sent: ', err);
+				}
+				else if (body.includes('faultCode')) {
+					logger.error('Opportunity Record for Contact ' + req.body.contactId + ' Not Retrieved');
+					res.sendStatus(200);
 				}
 				else {
 
 					let parsedBody = body.split('<value><i4>')[1].split('</i4></value>')[0];
-
 					req.body.opportunityId = parsedBody;
-
+					logger.info('Opporortunity Record ID ' + parsedBody + ' Retrieved and Added to Request Body');
 					next();
 				}
 			});
 		}
 		else {
 
-			console.log('POST Request Declined from IP: ' + req.ip);
+			logger.warn('POST Request Declined from IP: ' + req.ip);
 			res.sendStatus(401);
 		}
 	},
@@ -65,14 +72,26 @@ const stageController = {
 			body	: stageBody
 		}, function (err, resp, body) {
 
+			logger.verbose('API Stage Update Response Body: ' + body);
+
 			if (err) {
 				res.sendStatus(200);
-				return console.log('Request to API not sent: ', err);
+				return logger.error('Request to API not sent: ', err);
+			}
+			else if (body.includes('faultCode')) {
+				logger.error('Stage Update for Contact ' + req.body.contactId + ' Not Completed');
+				res.sendStatus(200);
+			}
+			else if (body.includes('<value><i4>' + req.body.opportunityId)) {
+
+				logger.info('Stage Update for Contact ' + req.body.contactId + ' Successful');
+				res.sendStatus(200);
 			}
 			else {
 
-				console.log(body);
+				logger.warn('Unknown Response');
 				res.sendStatus(200);
+
 			}
 		});
 	}

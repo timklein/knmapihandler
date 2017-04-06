@@ -2,6 +2,8 @@
 
 const request = require('request');
 
+const logger = require('../utils/logger.js');
+
 const configVars = require('../config/configVars.json');
 const accounts = require('../data/accounts.json');
 
@@ -26,16 +28,21 @@ const tagController = {
 			body	: findTag
 		}, function (err, resp, body) {
 
+			logger.verbose('API Tag Identification Response Body: ' + body);
+
 			if (err) {
 				res.sendStatus(200);
-				return console.log('Request to API not sent: ', err);
+				return logger.error('Request to API not sent: ', err);
+			}
+			else if (body.includes('faultCode')) {
+				logger.error('Tag ID Not Retrieved');
+				res.sendStatus(200);
 			}
 			else {
 				
 				let parsedBody = body.split('<value><i4>')[1].split('</i4></value>')[0];
-
 				req.body.tagId = parsedBody;
-
+				logger.info('Tag Info Retrieved and Added to Request Body');
 				next();
 			}
 		});
@@ -59,13 +66,19 @@ const tagController = {
 			body	: updateBody
 		}, function (err, resp, body) {
 
+			logger.verbose('API Apply Tag Response Body: ' + body);
+
 			if (err) {
 				res.sendStatus(200);
-				return console.log('Request to API not sent: ', err);
+				return logger.error('Request to API not sent: ', err);
+			}
+			else if (body.includes('faultCode')) {
+				logger.error('Tag Not Applied to ' + req.body.newContactId);
+				res.sendStatus(200);
 			}
 			else {
 
-				console.log(body);
+				body.includes('<boolean>1') ? logger.info('Tag ID ' + req.body.tagId + ' applied to contact ' + req.body.newContactId) : logger.info('Tag ID ' + req.body.tagId + ' already exists on contact ' + req.body.newContactId); //jshint ignore:line
 				res.sendStatus(200);
 			}
 		});

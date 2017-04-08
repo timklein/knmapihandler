@@ -11,6 +11,8 @@ const stageController = require('./controllers/stageController.js');
 
 const app = express();
 
+app.set('trust proxy', 'loopback');
+
 app.use(bodyParser.urlencoded({ extended:false }));
 app.use(morgan(':remote-addr [:date[clf]] ":method :url" status :status :res[content-length] bytes :response-time[2] ms', {"stream": logger.stream}));
 

@@ -44,7 +44,7 @@ const stageController = {
 
 					let parsedBody = body.split('<value><i4>')[1].split('</i4></value>')[0];
 					req.body.opportunityId = parsedBody;
-					logger.info('Opporortunity Record ID ' + parsedBody + ' Retrieved and Added to Request Body');
+					logger.info('Opportunity Record ID ' + parsedBody + ' Retrieved and Added to Request Body');
 					next();
 				}
 			});

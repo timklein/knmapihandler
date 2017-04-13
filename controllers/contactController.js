@@ -15,13 +15,13 @@ const contactController = {
 	retrieveForReferral	: function (req,res, next) {
 
 		// Build API URL path for the record query
-		apiURL = "https://" + configVars.sourceAcct + ".infusionsoft.com/api/xmlrpc";
+		apiURL = "https://" + configVars.masterAcct + ".infusionsoft.com/api/xmlrpc";
 
 		// Confirm the incoming request has the assigned access key
 		if (req.body.accessKey == configVars.accessKey) {
 		
 			// Get the Infusionsoft API access key associated with the account this request is coming from
-			let keyBuild = accounts[configVars.sourceAcct].key;
+			let keyBuild = accounts[configVars.masterAcct].key;
 
 			// Populate the variables into the API submission string
 			let searchBody = '<?xml version="1.0" encoding="UTF-8"?><methodCall><methodName>ContactService.load</methodName><params><param><value><string>' + keyBuild + '</string></value></param><param><value><int>' + req.body.contactId + '</int></value></param><param><value><array><data><value><string>FirstName</string></value><value><string>LastName</string></value><value><string>Email</string></value><value><string>Phone1</string></value><value><string>Phone2</string></value><value><string>StreetAddress1</string></value><value><string>City</string></value><value><string>State</string></value><value><string>PostalCode</string></value><value><string>Country</string></value></data></array></value></param></params></methodCall>';
@@ -120,7 +120,7 @@ const contactController = {
 		// Populate the variables into the API submission string
 		let submissionBody = '<?xml version="1.0" encoding="UTF-8"?><methodCall><methodName>ContactService.addWithDupCheck</methodName><params><param><value><string>' + keyBuild + '</string></value></param><param><value><struct><member><name>FirstName</name><value><string>' + FirstName + '</string></value></member><member><name>LastName</name><value><string>' + LastName + '</string></value></member><member><name>Email</name><value><string>' + Email + '</string></value></member><member><name>Phone1</name><value><string>' + Phone1 + '</string></value></member><member><name>Phone2</name><value><string>' + Phone2 + '</string></value></member><member><name>StreetAddress1</name><value><string>' + StreetAddress1 + '</string></value></member><member><name>City</name><value><string>' + City + '</string></value></member><member><name>State</name><value><string>' + State + '</string></value></member><member><name>PostalCode</name><value><string>' + PostalCode + '</string></value></member><member><name>Country</name><value><string>' + Country + '</string></value></member><member><name>' + customField1 + '</name><value><string>' + customValue1 + '</string></value></member></struct></value></param><param><value><string>Email</string></value></param></params></methodCall>';
 
-		// Send the request to the Infussionsoft API
+		// Send the request to the Infusionsoft API
 		request ({
 			method	: 'POST',
 			url		: apiURL,

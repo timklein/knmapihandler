@@ -5,7 +5,7 @@ const request = require('request');
 const logger = require('../utils/logger.js');
 
 const configVars = require('../config/configVars.json');
-const accounts = require('../data/accounts.json');
+const accounts = require('../config/accounts.json');
 
 let apiURL = "";
 

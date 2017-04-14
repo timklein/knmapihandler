@@ -15,13 +15,13 @@ Remove `.sample` extension from both `config/configVars.json.sample` and `config
 
 ### Receiving Account (to) Side
 1. Receiving account must have a custom field created to accept the sending account's Contact ID number. This allows for simplified record updating later in the case that any information on either contact record changes.
-2. Record the field name for this custom field in the `data/accounts.json` file as the value for the `customField1` key, ensuring an underscore character (`_`) is added to the beginning of the field name.
+2. Record the field name for this custom field in the `config/accounts.json` file as the value for the `customField1` key, ensuring an underscore character (`_`) is added to the beginning of the field name.
 3. Receiving account must have a tag to apply with a unique name that is loaded as the value for the `referTagName` key in `config/configVars.json`
 
 ## Update Stage Moves in Master Account
 ### Sending (Affiliate) Account Side
 1. http POST (required)
-* `contactId` = Infusionsoft Merge Field Code for the custom field created to hold the master Contact ID number. The value should look like `~Contact.[FieldName]~` where FieldName matches the `customField1` key in `data/accounts.json`
+* `contactId` = Infusionsoft Merge Field Code for the custom field created to hold the master Contact ID number. The value should look like `~Contact.[FieldName]~` where FieldName matches the `customField1` key in `config/accounts.json`
 * `accessKey` = Access Key for KNM API Server. Must match key in `config/configVars.json`
 * `toStage` = Signifier for which stage the record is moving to. Valid values are `booked`, `complete` or `not_interested`.
 

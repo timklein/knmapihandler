@@ -96,7 +96,6 @@ const formController = {
 			logger.warn('POST Request Declined from IP: ' + req.ip);
 			res.sendStatus(401);
 		}
-			
 	},
 	updateMaster	: function (req, res) {
 

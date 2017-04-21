@@ -1,0 +1,8 @@
+{
+	"accessKey"		: "INTERNAL_APP_KEY",
+	"masterAcct"	: "ACCOUNT_ID",
+	"referTagName"	: "TAG_NAME",
+	"booked"		: "STAGE_ID_#",
+	"complete"		: "STAGE_ID_#",
+	"not_interested": "STAGE_ID_#"
+}

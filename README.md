@@ -42,6 +42,6 @@ No additional setup required.
 * Production Monitoring
 
 ## ToDo
-* Contact Lookup if Master ContactId Doesn't Exist
 * Web Front End for Admin and Error Log Review
 * ~~Error Logging~~
+* ~~Contact Lookup if Master ContactId Doesn't Exist~~

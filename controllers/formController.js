@@ -91,7 +91,7 @@ const formController = {
 				}
 			});
 		}
-		else {
+		else { 
 
 			logger.warn('POST Request Declined from IP: ' + req.ip);
 			res.sendStatus(401);
@@ -114,9 +114,10 @@ const formController = {
 		let type 		= req.body.type || ""; 
 		let viability 	= req.body.viability || ""; 
 		let date 		= req.body.date || "";
+		let provider 	= accounts[req.body.fromAccount].name || "";
 
 		// Populate the variables into the API submission string
-		let updateBody = '<?xml version="1.0" encoding="UTF-8"?><methodCall><methodName>ContactService.update</methodName><params><param><value><string>' + keyBuild + '</string></value></param><param><value><int>' + toId + '</int></value></param><param><value><struct><member><name>_ProcedureType</name><value><string>' + type + '</string></value></member><member><name>_HowWereCellsCounted</name><value><string>' + how + '</string></value></member><member><name>Email</name><value><string>' + email + '</string></value></member><member><name>_LotNumber</name><value>' + lot + '</value></member><member><name>_PackNumber</name><value>' + pack + '</value></member><member><name>_NucleatedCellCount</name><value>' + count + '</value></member><member><name>_PercentCellViability</name><value>' + viability + '</value></member><member><name>_ProcedureDate</name><value>' + date + '</value></member></struct></value></param></params></methodCall>';
+		let updateBody = '<?xml version="1.0" encoding="UTF-8"?><methodCall><methodName>ContactService.update</methodName><params><param><value><string>' + keyBuild + '</string></value></param><param><value><int>' + toId + '</int></value></param><param><value><struct><member><name>_ProcedureType</name><value><string>' + type + '</string></value></member><member><name>_HowWereCellsCounted</name><value><string>' + how + '</string></value></member><member><name>Email</name><value><string>' + email + '</string></value></member><member><name>_LotNumber</name><value>' + lot + '</value></member><member><name>_PackNumber</name><value>' + pack + '</value></member><member><name>_NucleatedCellCount</name><value>' + count + '</value></member><member><name>_PercentCellViability</name><value>' + viability + '</value></member><member><name>_ProcedureDate</name><value>' + date + '</value></member><member><name>' + configVars.providerField + '</name><value>' + provider + '</value></member></struct></value></param></params></methodCall>';
 
 		// Send the request to the Infussionsoft API
 		request ({

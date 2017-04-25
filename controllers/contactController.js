@@ -24,7 +24,7 @@ const contactController = {
 			let keyBuild = accounts[configVars.masterAcct].key;
 
 			// Populate the variables into the API submission string
-			let searchBody = '<?xml version="1.0" encoding="UTF-8"?><methodCall><methodName>ContactService.load</methodName><params><param><value><string>' + keyBuild + '</string></value></param><param><value><int>' + req.body.contactId + '</int></value></param><param><value><array><data><value><string>FirstName</string></value><value><string>LastName</string></value><value><string>Email</string></value><value><string>Phone1</string></value><value><string>Phone2</string></value><value><string>StreetAddress1</string></value><value><string>City</string></value><value><string>State</string></value><value><string>PostalCode</string></value><value><string>Country</string></value></data></array></value></param></params></methodCall>';
+			let searchBody = '<?xml version="1.0" encoding="UTF-8"?><methodCall><methodName>ContactService.load</methodName><params><param><value><string>' + keyBuild + '</string></value></param><param><value><int>' + req.body.contactId + '</int></value></param><param><value><array><data><value><string>FirstName</string></value><value><string>LastName</string></value><value><string>ContactNotes</string></value><value><string>Email</string></value><value><string>Phone1</string></value><value><string>Phone2</string></value><value><string>StreetAddress1</string></value><value><string>City</string></value><value><string>State</string></value><value><string>PostalCode</string></value><value><string>Country</string></value></data></array></value></param></params></methodCall>';
 
 			// Send the request to the Infussionsoft API
 			request ({
@@ -59,6 +59,9 @@ const contactController = {
 								break;
 							case 'LastName' :
 								req.body.LastName = fieldValue;
+								break;
+							case 'ContactNotes' :
+								req.body.ContactNotes = fieldValue;
 								break;
 							case 'Email' :
 								req.body.Email = fieldValue;

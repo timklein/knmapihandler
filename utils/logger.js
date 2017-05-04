@@ -1,10 +1,13 @@
 'use strict';
 
 const winston = require('winston');
+const dailyRotate = require('winston-daily-rotate-file');
+require('winston-loggly-bulk');
 const split = require('split');
 const fs = require('fs');
 const path = require('path');
-const dailyRotate = require('winston-daily-rotate-file');
+
+const configVars = require('../config/configVars.json');
 
 const logDirectory = path.join(__dirname, '../log');
 const tsFormat = () => (new Date()).toString();
@@ -32,6 +35,12 @@ const logger = new (winston.Logger)({
 			formatter: function (options) {
 				return `${options.level.toUpperCase()}: ${options.timestamp()} - ${(options.message ? options.message : '')}`;
 			}
+		}),
+		new (winston.transports.Loggly) ({
+			token: configVars.loggly_token,
+			subdomain: configVars.loggly_subdomain,
+			tags: configVars.loggly_tags,
+			json:true
 		})
 	]
 });

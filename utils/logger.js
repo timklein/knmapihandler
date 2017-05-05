@@ -37,6 +37,7 @@ const logger = new (winston.Logger)({
 			}
 		}),
 		new (winston.transports.Loggly) ({
+			level: 'debug',
 			token: configVars.loggly_token,
 			subdomain: configVars.loggly_subdomain,
 			tags: configVars.loggly_tags,

@@ -23,7 +23,7 @@ Remove `.sample` extension from both `config/configVars.json.sample` and `config
 1. http POST (required)
 * `contactId` = Infusionsoft Merge Field Code for the custom field created to hold the master Contact ID number. The value should look like `~Contact.[FieldName]~` where FieldName matches the `customField1` key in `config/accounts.json`
 * `accessKey` = Access Key for KNM API Server. Must match key in `config/configVars.json`
-* `toStage` = Signifier for which stage the record is moving to. Valid values are `booked`, `complete` or `not_interested`.
+* `toStage` = Signifier for which stage the record is moving to. Valid values are `booked`, `complete`, `not_interested` or `in_progress`.
 
 ### Receiving (Master) Account Side
 No additional setup required.
@@ -39,9 +39,9 @@ No additional setup required.
 No additional setup required.
 
 ## Current Status
-* Production Monitoring
+* Production Monitoring through Loggly
 
 ## ToDo
-* Web Front End for Admin and Error Log Review
+* ~~Web Front End for Admin and Error Log Review~~
 * ~~Error Logging~~
 * ~~Contact Lookup if Master ContactId Doesn't Exist~~

@@ -1,9 +1,15 @@
 {
-	"accessKey"		: "INTERNAL_APP_KEY",
-	"masterAcct"	: "ACCOUNT_ID",
-	"referTagName"	: "TAG_NAME",
-	"providerField" : "CUSTOM_PROVIDER_FIELD_NAME",
-	"booked"		: "STAGE_ID_#",
-	"complete"		: "STAGE_ID_#",
-	"not_interested": "STAGE_ID_#"
+	"accessKey"			: "INTERNAL_APP_KEY",
+	"masterAcct"		: "ACCOUNT_ID",
+	"referTagName"		: "TAG_NAME",
+	"providerField" 	: "CUSTOM_PROVIDER_FIELD_NAME",
+	"booked"			: "STAGE_ID_#",
+	"complete"			: "STAGE_ID_#",
+	"not_interested"	: "STAGE_ID_#",
+	"in_progress"		: "STAGE_ID_",
+	"loggly_token"		: "LOGGLY_CUSTOMER_TOKEN",
+	"loggly_subdomain"	: "LOGGLY_SUBDOMAIN",
+	"loggly_tags"		: [
+		"LOGGLY_IDENTIFICATION_TAGS"
+	]
 }

@@ -19,7 +19,14 @@ const contactController = {
 
 		// Confirm the incoming request has the assigned access key
 		if (req.body.accessKey == configVars.accessKey) {
-		
+
+			// Convert incoming account name to application ID
+			for (var key in accounts) {
+				if (req.body.toLocation === accounts[key].name) {
+					req.body.toAccount = key;
+				}
+			}
+
 			// Get the Infusionsoft API access key associated with the account this request is coming from
 			let keyBuild = accounts[configVars.masterAcct].key;
 

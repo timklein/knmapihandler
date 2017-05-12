@@ -20,9 +20,9 @@ const contactController = {
 		// Confirm the incoming request has the assigned access key
 		if (req.body.accessKey == configVars.accessKey) {
 
-			// Convert incoming account name to application ID
+			// Convert incoming account ID code from drilldown list to application ID
 			for (var key in accounts) {
-				if (req.body.toLocation === accounts[key].name) {
+				if (accounts[key].referralId.includes(req.body.toLocation)) {
 					req.body.toAccount = key;
 				}
 			}

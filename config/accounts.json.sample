@@ -2,11 +2,13 @@
 	"ACCOUNT_IDENTIFIER" : {
 		"name"			: "ACCOUNT_NAME_STRING",
 		"key"			: "INFUSIONSOFT_APP_KEY",
-		"customField1"	: "FROM_ACCT_CUSTOM_FIELD_ID"
+		"customField1"	: "FROM_ACCT_CUSTOM_FIELD_ID",
+		"referralId"	: ["ACCOUNT_ID_CODES" or "N/A"]
 	},
 	"ACCOUNT_IDENTIFIER" : {
 		"name"			: "ACCOUNT_NAME_STRING",
 		"key"			: "INFUSIONSOFT_APP_KEY",
-		"customField1"	: "FROM_ACCT_CUSTOM_FIELD_ID"
+		"customField1"	: "FROM_ACCT_CUSTOM_FIELD_ID",
+		"referralId"	: ["ACCOUNT_ID_CODES" or "N/A"]
 	}
 }

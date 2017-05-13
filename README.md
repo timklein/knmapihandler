@@ -11,7 +11,7 @@ Remove `.sample` extension from both `config/configVars.json.sample` and `config
 1. http POST (required)
     * `contactId` = Infusionsoft Merge Field Code `~Contact.Id~`
     * `accessKey` = Access Key for KNM API Server. Must match key in `config/configVars.json`
-    * `toLocation` = Infusionsoft account name for the account where this record will be created. The value of the incoming account name must match the `name` value in `config/accounts.json` exactly.
+    * `toLocation` = Infusionsoft account name for the account where this record will be created. The value comes from a custom field that's on the master account's Referral Form. The value of the incoming account name must match one of the `referralId` array values in `config/accounts.json` exactly.
 
 ### Receiving Account (to) Side
 1. Receiving account must have a custom field created to accept the sending account's Contact ID number. This allows for simplified record updating later in the case that any information on either contact record changes.

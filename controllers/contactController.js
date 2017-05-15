@@ -152,7 +152,7 @@ const contactController = {
 
 				let newId = body.split('<value><i4>')[1].split('</i4></value>')[0];
 				req.body.newContactId = newId;
-				logger.info('Contact Record ' + newId + ' Created/Updated');
+				logger.info('Contact Record ' + newId + ' Created/Updated in Application ' + req.body.toAccount);
 				next();
 			}
 		});

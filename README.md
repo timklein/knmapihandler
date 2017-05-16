@@ -8,7 +8,7 @@ Remove `.sample` extension from both `config/configVars.json.sample` and `config
 
 ## Create a New Contact Record on Referral
 ### Sending Account (from) Side
-1. http POST (required)
+1. http POST (required) - To address must include the path `/incoming/cc`
     * `contactId` = Infusionsoft Merge Field Code `~Contact.Id~`
     * `accessKey` = Access Key for KNM API Server. Must match key in `config/configVars.json`
     * `toLocation` = Infusionsoft account name for the account where this record will be created. The value comes from a custom field that's on the master account's Referral Form. The value of the incoming account name must match one of the `referralId` array values in `config/accounts.json` exactly.
@@ -20,7 +20,7 @@ Remove `.sample` extension from both `config/configVars.json.sample` and `config
 
 ## Update Stage Moves in Master Account
 ### Sending (Affiliate) Account Side
-1. http POST (required)
+1. http POST (required) - To address must include the path `/incoming/sm`
 * `contactId` = Infusionsoft Merge Field Code for the custom field created to hold the master Contact ID number. The value should look like `~Contact.[FieldName]~` where FieldName matches the `customField1` key in `config/accounts.json`
 * `accessKey` = Access Key for KNM API Server. Must match key in `config/configVars.json`
 * `toStage` = Signifier for which stage the record is moving to. Valid values are `booked`, `complete`, `not_interested` or `in_progress`.
@@ -30,7 +30,7 @@ No additional setup required.
 
 ## Update Processed Form Values in Master Account
 ### Sending (Affiliate) Account Side
-1. http POST (required)
+1. http POST (required) - To address must include the path `/incoming/fp`
 * `contactId` = Infusionsoft Merge Field Code `~Contact.Id~`
 * `accessKey` = Access Key for KNM API Server. Must match key in `config/configVars.json`
 * `fromAccount` = Infusionsoft account identifier for the account where this record is coming from (i.e. `op132`, `ag362`)
@@ -40,7 +40,7 @@ No additional setup required.
 
 ## Trigger API Goal with http POST
 ### Triggering Account
-1. http POST (required)
+1. http POST (required) - To address must include the path `/incoming/tr`
 * `contactId` = Infusionsoft Merge Field Code for contact. `~Contact.Id~` if this transaction is to trigger a goal in the this same account. If it is going back to the Master Account, use the merge field that hold that original contact ID.
 * `accessKey` = Access Key for KNM API Server. Must match key in `config/configVars.json`
 * `integration` = Infusionsoft account identifier for the account where the goal is being triggered as specified in the goal configuration (i.e. `op132`, `ag362`).

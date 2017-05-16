@@ -12,6 +12,7 @@ const form = require('./controllers/formController.js');
 const query = require('./controllers/queryController.js');
 const notes = require('./controllers/notesController.js');
 const optStatus = require('./controllers/optStatusController.js');
+const apiTrigger = require('./controllers/apiTriggerController.js');
 
 const app = express();
 
@@ -28,6 +29,9 @@ app.post('/incoming/sm', stage.opportunityId, stage.updateStage);
 
 // Form Processing Route - Retrieve custom form fields from source contact record, update master contact record
 app.post('/incoming/fp', form.retrieveFormData, query.findContactByEamil, form.updateMaster);
+
+// API Trigger Route - Trigger specific API goal in destination account campaign 
+app.post('/incoming/tr', apiTrigger.trigger);
 
 const port = 3000;
 const server = app.listen(port, function() {

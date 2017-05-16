@@ -38,10 +38,26 @@ No additional setup required.
 ### Receiving (Master) Account Side
 No additional setup required.
 
+## Trigger API Goal with http POST
+### Triggering Account
+1. http POST (required)
+* `contactId` = Infusionsoft Merge Field Code for contact. `~Contact.Id~` if this transaction is to trigger a goal in the this same account. If it is going back to the Master Account, use the merge field that hold that original contact ID.
+* `accessKey` = Access Key for KNM API Server. Must match key in `config/configVars.json`
+* `integration` = Infusionsoft account identifier for the account where the goal is being triggered as specified in the goal configuration (i.e. `op132`, `ag362`).
+* `callName` = The Call Name for the goal being triggered as specified in the goal configuration.
+
+### Account Goal Being Triggered
+1. Configured API Goal in a campaign (required)
+* `Integration` = The application identifier. This field is typically populated automatically (i.e. `op132`, `ag362`).
+* `Call Name` = A text identifier (no spaces). Can be any text you want. It will be called by the triggering http POST.
+
 ## Current Status
 * Production Monitoring through Loggly
 
 ## ToDo
+* ~~Create Option to Trigger API Goals Through the App~~
+* ~~Ensure Marketing Opt In Status is Set Set for New Contact~~
+* ~~Carry Notes Across with Contact Information~~
 * ~~Web Front End for Admin and Error Log Review~~
 * ~~Error Logging~~
 * ~~Contact Lookup if Master ContactId Doesn't Exist~~

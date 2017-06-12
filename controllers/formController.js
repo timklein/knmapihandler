@@ -11,18 +11,19 @@ let apiURL = "";
 
 const formController = {
 
+	// Retrieve data from the source form - Incoming Data is the Source contactId, Application accessKey & fromAccount
 	retrieveFormData	: function (req, res, next) {
 
-		// Confirm the incoming request has the assigned access key
+		// This is the first step of the route so confirm the incoming request has the assigned access key
 		if (req.body.accessKey == configVars.accessKey) {
 
-			// Build API URL path for the record query
+			// Build API URL path for a record query from the source account
 			apiURL = "https://" + req.body.fromAccount + ".infusionsoft.com/api/xmlrpc/";
 
 			// Get the Infusionsoft API access key associated with the account this request is coming from
 			let keyBuild = accounts[req.body.fromAccount].key;
 
-			// Retrieve Contact.Id for master account from this account's custom field
+			// Retrieve Contact.Id for the master account from this account's custom field
 			let toId = accounts[req.body.fromAccount].customField1;
 
 			// Populate the variables into the API submission string
@@ -36,7 +37,9 @@ const formController = {
 				body	: retrieveBody
 			}, function (err, resp, body) {
 
-				logger.verbose('API Retrieve Custom Form Fields Response Body: ' + body);
+				// Log the raw submission to and reply from the API
+				logger.verbose('SUBMITTED - Retrieve Custom Form Fields API Submission Body: ' + retrieveBody);
+				logger.verbose('RESPONSE - Retrieve Custom Form Fields API Response Body: ' + body);
 
 				if (err) {
 					res.sendStatus(200);
@@ -47,6 +50,8 @@ const formController = {
 					res.sendStatus(200);
 				}
 				else {
+
+					// This next section clumsily parses the returned reply into 
 
 					let parsedBody = body.split('<name>');
 
@@ -91,6 +96,7 @@ const formController = {
 				}
 			});
 		}
+		// If an invalid/no accessKey is supplied, return Unauthorized error code
 		else { 
 
 			logger.warn('POST Request Declined from IP: ' + req.ip);

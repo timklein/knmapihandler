@@ -40,12 +40,14 @@ const stageController = {
 					logger.error('Opportunity Record for Contact ' + req.body.contactId + ' Not Retrieved');
 					res.sendStatus(200);
 				}
-				else {
-
+				else if (body.includes('<i4>')) {
 					let parsedBody = body.split('<value><i4>')[1].split('</i4></value>')[0];
 					req.body.opportunityId = parsedBody;
 					logger.info('Opportunity Record ID ' + parsedBody + ' Retrieved and Added to Request Body');
 					next();
+				}
+				else {
+					logger.error("Unknown Error");
 				}
 			});
 		}

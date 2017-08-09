@@ -47,7 +47,8 @@ const stageController = {
 					next();
 				}
 				else {
-					logger.error("Unknown Error");
+					logger.error("No Opportunity Records Retrieved for Contact " + req.body.contactId);
+					res.sendStatus(200);
 				}
 			});
 		}

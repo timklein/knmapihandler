@@ -41,14 +41,14 @@ const contactController = {
 				body	: searchBody
 			}, function (err, resp, body) {
 
-				logger.verbose('API Load Contact Response Body: ' + body);
+				logger.verbose(configVars.masterAcct + ': API Load Contact Response Body: ' + body);
 
 				if (err) {
 					res.sendStatus(200);
 					return logger.error('Request to API not sent: ', err);
 				}
 				else if (body.includes('faultCode')) {
-					logger.error('Contact Info Not Retrieved');
+					logger.error('Contact Info Not Retrieved for Contact ' + req.body.contactId + ' in Application ' + configVars.masterAcct);
 					res.sendStatus(200);
 				}
 				else {

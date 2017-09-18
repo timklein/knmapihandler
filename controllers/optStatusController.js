@@ -29,14 +29,14 @@ const optStatusController = {
 			body	: submissionBody
 		}, function (err, resp, body) {
 
-			logger.verbose('API Opt In Email Address Response Body: ' + body);
+			logger.verbose(req.body.toAccount + ': API Opt In Email Address Response Body: ' + body);
 
 			if (err) {
 				res.sendStatus(200);
 				return logger.error('Request to API not sent: ', err);
 			}
 			else if (body.includes('faultCode')) {
-				logger.error('API Error - Opt In Update Not Processed');
+				logger.error('API Error - Opt In Update Not Processed for Email ' + req.body.Email + ' in Application ' + req.body.toAccount);
 				next();
 			}
 			else if (body.includes('<boolean>0</boolean>')) {

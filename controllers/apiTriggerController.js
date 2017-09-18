@@ -45,7 +45,7 @@ const apiTriggerController = {
 				res.sendStatus(200);
 			}
 			else {
-				logger.warn('Unknown Outcome Processing API Trigger for callName: ' + req.body.callName + ', in application: ' + req.body.integration);
+				logger.warn('Unknown Outcome Processing API Trigger for callName: ' + req.body.callName + ', in application: ' + req.body.integration + ' for Contact ' + req.body.contactId);
 				res.sendStatus(200);
 			}
 		});

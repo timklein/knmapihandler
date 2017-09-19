@@ -116,7 +116,7 @@ const tagController = {
 					res.sendStatus(200);
 				}
 				else {
-				body.includes('<boolean>1') ? logger.info('Referral Tag ID ' + req.body.tagId + ' applied to contact ' + req.body.newContactId + ' in Application ' + req.body.toAccount) : logger.info('Referral Tag ID ' + req.body.tagId + ' already exists on contact ' + req.body.newContactId + ' in Application ' + req.body.toAccount); //jshint ignore:line
+				body.includes('<boolean>1') ? logger.info('Location Tag ID ' + req.body.locTagId + ' applied to contact ' + req.body.newContactId + ' in Application ' + req.body.toAccount) : logger.info('Location Tag ID ' + req.body.locTagId + ' already exists on contact ' + req.body.newContactId + ' in Application ' + req.body.toAccount); //jshint ignore:line
 				res.sendStatus(200);
 				}
 			});
